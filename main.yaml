@@ -4,6 +4,13 @@
   gather_facts: yes
 
   tasks:
+  - name: Update Patch
+    apt:
+      name: Update
+      update_cache: yes
+    become: yes
+    register: update_repo
+
   - name: Install nginx
     apt:
       name: nginx
@@ -13,4 +20,6 @@
 
   - name: Result
     debug:
-      msg: "{{ nginx }}"
+      msg:
+      - "{{ update_repo }}"
+      - "{{ nginx }}"
